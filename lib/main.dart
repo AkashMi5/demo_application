@@ -1,3 +1,4 @@
+import 'package:demo_application/screen_one.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -98,67 +99,80 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
-    return Container(
-      width: width,
-      height: height,
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Positioned(
-            left: position.dx,
-            top: position.dy,
-            child: GestureDetector(
-                child: Draggable(
-              maxSimultaneousDrags: 1,
-              feedback: Container(
-                height: 100,
-                width: 100,
-                color: Colors.green,
+    return Scaffold(
+      body: Container(
+        width: width,
+        height: height,
+        color: Colors.white,
+        child: Stack(
+          children: [
+            Positioned(
+              left: 50,
+              top: 50,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ScreenOne()));
+                },
+                child: const Text("Go to Screen One"),
               ),
-              childWhenDragging: Opacity(
-                opacity: .3,
-                child: Container(
+            ),
+            Positioned(
+              left: position.dx,
+              top: position.dy,
+              child: GestureDetector(
+                  child: Draggable(
+                maxSimultaneousDrags: 1,
+                feedback: Container(
                   height: 100,
                   width: 100,
                   color: Colors.green,
                 ),
-              ),
-              onDragEnd: (details) => updatePosition(details.offset),
-              child: Container(
-                width: 100.0,
-                height: 100.0,
-                color: Colors.green,
-              ),
-            )),
-          ),
-          Positioned(
-            left: position2.dx,
-            top: position2.dy,
-            child: GestureDetector(
-                child: Draggable(
-              maxSimultaneousDrags: 1,
-              feedback: Container(
-                height: 100,
-                width: 100,
-                color: Colors.red,
-              ),
-              childWhenDragging: Opacity(
-                opacity: .3,
+                childWhenDragging: Opacity(
+                  opacity: .3,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.green,
+                  ),
+                ),
+                onDragEnd: (details) => updatePosition(details.offset),
                 child: Container(
+                  width: 100.0,
+                  height: 100.0,
+                  color: Colors.green,
+                ),
+              )),
+            ),
+            Positioned(
+              left: position2.dx,
+              top: position2.dy,
+              child: GestureDetector(
+                  child: Draggable(
+                maxSimultaneousDrags: 1,
+                feedback: Container(
                   height: 100,
                   width: 100,
                   color: Colors.red,
                 ),
-              ),
-              onDragEnd: (details) => updatePosition2(details.offset),
-              child: Container(
-                width: 100.0,
-                height: 100.0,
-                color: Colors.red,
-              ),
-            )),
-          ),
-        ],
+                childWhenDragging: Opacity(
+                  opacity: .3,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.red,
+                  ),
+                ),
+                onDragEnd: (details) => updatePosition2(details.offset),
+                child: Container(
+                  width: 100.0,
+                  height: 100.0,
+                  color: Colors.red,
+                ),
+              )),
+            ),
+          ],
+        ),
       ),
     );
   }
